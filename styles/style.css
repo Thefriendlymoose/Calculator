@@ -71,6 +71,7 @@ textarea, button{
     font-family: 'Ruluko', sans-serif;
     background-color: #EAF2F0;
     border: none;
+    overflow-y: hidden;
     
 }
 
@@ -97,7 +98,7 @@ textarea, button{
     margin: 3px;
     font-family: 'Ruluko', sans-serif;
     font-size: 36px;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-radius: 2px;
     outline: none;
 }
