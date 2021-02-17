@@ -1,0 +1,219 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Ruluko', sans-serif;
+    background-color: #D9FFF8;
+}
+
+textarea, button{
+    margin: 0;
+    padding: 0;
+}
+
+.pagewrapper{
+
+}
+.header{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background-color: #284B6C;
+}
+.header h1{
+    color: #FAA916;
+    font-size: 48px;
+    font-weight: normal;
+}
+
+.main-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.calculator-container{
+    width: 270px;
+    height: 432px;
+    background-color: #94849B;
+    border-radius: 2px;
+    margin-top: 120px;
+    padding: 9px;
+    display: grid;
+    grid-template-areas:    "result result result result"
+                            "clear back percent divide"
+                            "seven eight nine multi"
+                            "four five six minus"
+                            "one two three plus"
+                            "negate noll dot equals";
+    grid-template-rows: 96px 63px 63px 63px 63px 63px;
+    grid-template-columns: 63px 63px 63px 63px;
+}
+
+#result{
+    margin: 0 3px 6px 3px;
+    background-color: #EAF2F0;
+}
+
+#result textarea{
+    margin: 0;
+    overflow: hidden;
+    resize: none;
+    width: 100%;
+    text-align: end;
+    vertical-align: middle;
+    font-family: 'Ruluko', sans-serif;
+    background-color: #EAF2F0;
+    border: none;
+    
+}
+
+#result textarea:focus{
+    outline: none;
+}
+
+#entry-history{
+    height: 30px;
+    font-size: 18px;
+    margin-bottom: 0px;
+    padding: 5px 5px 5px 0;
+    color: rgba(36, 53, 62, 0.6);
+}
+
+#entry{
+    height: 60px;
+    font-size: 36px;
+    padding: 10px 5px 10px 0;
+    color: #24353E;
+}
+
+.button{
+    margin: 3px;
+    font-family: 'Ruluko', sans-serif;
+    font-size: 36px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    outline: none;
+}
+
+.non-number-button{
+    background-color: #64A6BD;
+    color: #FAA916;
+
+}
+
+.non-number-button:hover{
+    text-shadow: 0px 0px 5px #FAA916;
+}
+
+.non-number-button:focus{
+    text-shadow: 0px 0px 5px #FAA916;
+    border: 2px solid #FAA916;
+}
+
+.number-button{
+    background-color: #284B6C;
+    color: #F9DE9E;
+}
+
+.number-button:hover{
+    text-shadow: 0px 0px 5px #F9DE9E;
+}
+
+.number-button:focus{
+    text-shadow: 0px 0px 5px #F9DE9E;
+    border: 2px solid #F9DE9E;
+}
+
+/* operators */
+
+#result{
+    grid-area: result;
+}
+
+#clear{
+    grid-area: clear;
+}
+
+#back{
+    grid-area: back;
+}
+
+#percent{
+    grid-area: percent;
+}
+
+#divide{
+    grid-area: divide;
+}
+
+#multiplication{
+    grid-area: multi;
+}
+
+#minus{
+    grid-area: minus;
+}
+
+#negate{
+    grid-area: negate;
+}
+
+#zero{
+    grid-area: noll;
+}
+
+#equals{
+    grid-area: equals;
+}
+
+#plus{
+    grid-area: plus;
+}
+
+#decimal{
+    grid-area: dot;
+}
+
+/* Numbers */
+#nine{
+    grid-area: nine;
+}
+
+#eight{
+    grid-area: eight;
+}
+
+#seven{
+    grid-area: seven;
+}
+
+#six{
+    grid-area: six;
+}
+#five{
+    grid-area: five;
+}
+
+#four{
+    grid-area: four;
+}
+
+#three{
+    grid-area: three;
+}
+
+#two{
+    grid-area: two;
+}
+
+#one{
+    grid-area: one;
+}
+
