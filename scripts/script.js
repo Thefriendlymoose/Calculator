@@ -29,26 +29,27 @@ entry.value = chosenNumber;
 //EVENTLISTENERS
 numbers.forEach((button) => {
     button.addEventListener("click", (event) => {
-        if(String(chosenNumber).indexOf(".") < 0 && event.target.value === "."){
-            console.log("wrong");
-            if(chosenNumber === undefined || chosenNumber === 0 || chosenNumber === "0"){
-                chosenNumber = 0;
-                chosenNumber += event.target.value;
-                entry.value += event.target.value;
-            } else{
-                chosenNumber += event.target.value;
-                entry.value += event.target.value;
-            }
-        } else if(!(event.target.value === ".")) {
-            if(chosenNumber === 0 || chosenNumber === "0" || chosenNumber === undefined){
-                chosenNumber = event.target.value;
-                entry.value = event.target.value;
-            } else{
-                chosenNumber += event.target.value;
-                entry.value += event.target.value;
+        if(String(chosenNumber).length < 13){
+            if(String(chosenNumber).indexOf(".") < 0 && event.target.value === "."){
+                console.log("wrong");
+                if(chosenNumber === undefined || chosenNumber === 0 || chosenNumber === "0"){
+                    chosenNumber = 0;
+                    chosenNumber += event.target.value;
+                    entry.value += event.target.value;
+                } else{
+                    chosenNumber += event.target.value;
+                    entry.value += event.target.value;
+                }
+            } else if(!(event.target.value === ".")) {
+                if(chosenNumber === 0 || chosenNumber === "0" || chosenNumber === undefined){
+                    chosenNumber = event.target.value;
+                    entry.value = event.target.value;
+                } else{
+                    chosenNumber += event.target.value;
+                    entry.value += event.target.value;
+                }
             }
         }
-
     });
 });
 
@@ -64,7 +65,7 @@ operators.forEach((button) =>{
             previousOperator = currentOperator;
             entryHist.value = `${total} ${event.target.value} `;
             previousNumber = total;
-        } else if(chosenNumber === undefined){
+        } else if(chosenNumber === undefined && total !== undefined){
             currentOperator = event.target.value;
             entryHist.value = entryHist.value.slice(0, -2);
             entryHist.value += `${currentOperator} `
@@ -82,6 +83,19 @@ operators.forEach((button) =>{
                     entry.value = total;
                     previousOperator = currentOperator;
                     currentOperator = event.target.value;
+                } else if(chosenNumber === undefined && total === undefined){
+                    if(event.target.value !== "="){
+                        currentOperator = event.target.value;
+                        entryHist.value = entryHist.value.slice(0, -2);
+                        entryHist.value += `${currentOperator} `
+                    } else{
+                        total = operation(currentOperator, previousNumber, previousNumber);
+                        entryHist.value += `${previousNumber} ${event.target.value} `;
+                        chosenNumber = undefined;
+                        entry.value = total;
+                        previousOperator = currentOperator;
+                        currentOperator = event.target.value;
+                    }
                 } else{
                     total = operation(currentOperator, previousNumber, chosenNumber);
                     previousNumber = chosenNumber;
@@ -121,6 +135,10 @@ backButton.addEventListener("click", () => {
 
 sqrtButton.addEventListener("click", () =>{
     squareroot();
+});
+
+entryHist.addEventListener("ValueChange", () =>{
+    console.log("hello");
 });
 
 // FUNCTIONS
