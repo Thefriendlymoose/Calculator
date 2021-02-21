@@ -54,8 +54,7 @@ numbers.forEach((button) => {
 
 operators.forEach((button) =>{
     button.addEventListener("click", (event) => {
-        if(entryHist.value.indexOf("=") > 0 && event.target.value === "="){
-            //chosenNumber = 0;
+        if(entryHist.value.indexOf("=") > 0 && event.target.value === "=" && total !== undefined){
             entryHist.value = `${total} ${previousOperator} ${previousNumber} ${currentOperator}`
             total = operation(currentOperator, total, previousNumber);
             entry.value = total;
@@ -69,6 +68,8 @@ operators.forEach((button) =>{
             currentOperator = event.target.value;
             entryHist.value = entryHist.value.slice(0, -2);
             entryHist.value += `${currentOperator} `
+        } else if(entry.value === "cannot divide" || entry.value === "invalid input"){
+            clear();
         }
         
         else{
@@ -101,16 +102,14 @@ operators.forEach((button) =>{
         }
 
         if(entryHist.value.indexOf("/ 0") > 0){
-            clear(true);
+            clear("cannot divide");
         }
-
-        
     });
 });
 
 negateButton.addEventListener("click", () => {
     negate();
-})
+});
 
 clearButton.addEventListener("click", () => {
     clear();
@@ -176,19 +175,28 @@ function divide(a, b){
 
 
 function squareroot(){
-    if(chosenNumber !== undefined){
-        chosenNumber = Math.sqrt(chosenNumber);
-        if(chosenNumber.countDecimals() >= 4){
-            chosenNumber = chosenNumber.toFixed(3);
+    
+    if(chosenNumber !== undefined || total !== undefined){
+        if(chosenNumber >= 0 || total >= 0){
+            if(chosenNumber !== undefined){
+                chosenNumber = Math.sqrt(chosenNumber);
+                if(chosenNumber.countDecimals() >= 4){
+                    chosenNumber = chosenNumber.toFixed(3);
+                }
+                entry.value = chosenNumber;
+            } else{
+                total = Math.sqrt(total);
+                if(total.countDecimals() >= 4){
+                    total = total.toFixed(3);
+                }
+                entry.value = total;
+            }
+        } else{
+            clear("invalid input");
         }
-        entry.value = chosenNumber;
-    } else{
-        total = Math.sqrt(total);
-        if(total.countDecimals() >= 4){
-            total = total.toFixed(3);
-        }
-        entry.value = total;
     }
+
+
 }
 
 function negate(){
@@ -221,15 +229,15 @@ function negate(){
 }
 
 
-function clear(infinity){
-    if(infinity){
+function clear(message){
+    if(message){
         chosenNumber = 0;
         previousNumber = undefined;
         total = undefined;
         currentOperator = undefined;
         previousOperator = undefined;
         entryHist.value = "";
-        entry.value = "cannot divide";
+        entry.value = message;
     } else{
         chosenNumber = 0;
         previousNumber = undefined;

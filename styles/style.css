@@ -112,6 +112,10 @@ textarea, button{
     filter: drop-shadow(0px 0px 1px #FAA916) ;
 }
 
+#back:hover svg{
+    filter: drop-shadow(0px 0px 1px #FAA916) ;
+}
+
 .non-number-button{
     background-color: #64A6BD;
     color: #FAA916;
